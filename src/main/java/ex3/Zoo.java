@@ -1,38 +1,67 @@
 package ex3;
 
+import ex3.utils.AnimalType;
+import ex3.utils.FoodType;
+import ex3.zones.Zone;
+
+import java.util.ArrayList;
+
 public class Zoo {
 
+	/** Usage : THe name of the zoo
+	 *   String : nom
+	 */
 	private String nom;
-	private SavaneAfricaine savaneAfricaine;
-	private ZoneCarnivore zoneCarnivore;
-	private FermeReptile fermeReptile;
-	private Aquarium aquarium;
-	
+
+	/** Usage : The list of all zones in the zoo
+	 *   ArrayList<Zone> : zones
+	 */
+	private ArrayList<Zone> zones;
+
+	/** Constructor for Zoo
+	 *  @param nom the name of the zoo
+	 */
 	public Zoo(String nom){
 		this.nom = nom;
+		zones = new ArrayList<Zone>();
+		initZoo();
 	}
-	
-	public void addAnimal(String nomAnimal, String typeAnimal, String comportement){
-		if (typeAnimal.equals("MAMMIFERE") && comportement.equals("CARNIVORE")){
-			zoneCarnivore.addAnimal(typeAnimal, nomAnimal, comportement);
+
+	/** Init the zoo with built in zones */
+	private void initZoo(){
+		zones.add(new Zone("Aquarium", 0.2f, AnimalType.FISH, FoodType.HERBIVORE ));
+		zones.add(new Zone("Ferme au reptiles", 0.1f, AnimalType.REPTILE, FoodType.CARNIVORE ));
+		zones.add(new Zone("Savane affricaine", 10f, AnimalType.MAMAL, FoodType.HERBIVORE));
+		zones.add(new Zone("Carnivores", 10f, AnimalType.MAMAL, FoodType.CARNIVORE));
+	}
+
+	/** Add an animal to the zoo if an apropriate zone is found
+	 * @param animalToAdd
+	 */
+	public void addAnimal(Animal animalToAdd){
+
+		for(Zone z : zones){
+			if(z.correctHabitat(animalToAdd)){
+				z.addAnimal(animalToAdd);
+				break;
+			}
 		}
-		else if (typeAnimal.equals("MAMMIFERE") && comportement.equals("HERBIVORE")){
-			savaneAfricaine.addAnimal(typeAnimal, nomAnimal, comportement);
-		}
-		else if (typeAnimal.equals("REPTILE")){
-			fermeReptile.addAnimal(typeAnimal, nomAnimal, comportement);
-		}
-		else if (typeAnimal.equals("POISSON")){
-			aquarium.addAnimal(typeAnimal, nomAnimal, comportement);
+
+	}
+
+	/** Print the list of all animals sorted by zones */
+	public void printAllAnimals(){
+		for(Zone z : zones){
+			System.out.println(z);
 		}
 	}
-	
-	public void afficherListeAnimaux(){
-		savaneAfricaine.afficherListeAnimaux();
-		zoneCarnivore.afficherListeAnimaux();
-		fermeReptile.afficherListeAnimaux();
-		aquarium.afficherListeAnimaux();
-	}
+
+
+
+	//==============================================================//
+	//************************Getters/Setters***********************//
+	//==============================================================//
+
 
 	/** Getter for nom
 	 * @return the nom

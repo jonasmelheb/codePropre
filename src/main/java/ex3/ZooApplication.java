@@ -1,18 +1,22 @@
 package ex3;
 
+import ex3.utils.AnimalType;
+import ex3.utils.FoodType;
+
 public class ZooApplication {
 
 	public static void main(String[] args) {
 		Zoo zoo = new Zoo("Thoiry");
-		
-		zoo.addAnimal("Gazelle", "MAMMIFERE", "HERBIVORE");
-		zoo.addAnimal("Zèbre", "MAMIFERE", "HERBIVORE");
-		zoo.addAnimal("Lion", "MAMMIFERE", "HERBIVORE");
-		zoo.addAnimal("Panthère", "MAMMIFERE", "CARNIVORE");
-		zoo.addAnimal("Requin blanc", "POISSON", "HERBIVORE");
-		zoo.addAnimal("Truite dorée", "POISSON", "HERBIVORE");
-		zoo.addAnimal("Boa constrictor", "SERPENT", "CARNIVORE");
-		zoo.addAnimal("Python", "SERPENT", "CARNIVORE");
+
+		zoo.addAnimal(new Animal("Zèbre", AnimalType.MAMAL, FoodType.HERBIVORE));
+		zoo.addAnimal(new Animal("Lion", AnimalType.MAMAL, FoodType.CARNIVORE));
+		zoo.addAnimal(new Animal("Panthère", AnimalType.MAMAL, FoodType.CARNIVORE));
+		zoo.addAnimal(new Animal("Requin blanc", AnimalType.FISH, FoodType.HERBIVORE));
+		zoo.addAnimal(new Animal("Truite dorée", AnimalType.FISH, FoodType.HERBIVORE));
+		zoo.addAnimal(new Animal("Boa constrictor", AnimalType.REPTILE, FoodType.CARNIVORE));
+		zoo.addAnimal(new Animal("Python", AnimalType.REPTILE, FoodType.CARNIVORE));
+
+		zoo.printAllAnimals();
 	}
 
 }
